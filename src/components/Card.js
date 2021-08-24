@@ -2,7 +2,7 @@ import React from "react"
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
 function Card(props) {
-    const currentUser = React.useContext(CurrentUserContext);
+    const value = React.useContext(CurrentUserContext);
 
     function handleClick() {
         props.onCardClick(props.card);
@@ -22,11 +22,11 @@ function Card(props) {
             <div className="elements__container">
                 <h2 className="elements__header">{props.card.name}</h2>
                 <div className="elements__container elements__container_likes">
-                    <button type="button" className={`elements__like-button ${props.card.likes.some(item => item._id === currentUser._id) && "elements__like-button_liked"}`}
+                    <button type="button" className={`elements__like-button ${props.card.likes.some(item => item._id === value.currentUser._id) && "elements__like-button_liked"}`}
                         onClick={handleLikeClick}></button>
                     <span className="elements__counter-likes">{props.card.likes.length}</span>
                 </div>
-                <button type="button" className={`elements__delete-button ${props.card.owner._id !== currentUser._id && "elements__delete-button_disable"}`}
+                <button type="button" className={`elements__delete-button ${props.card.owner._id !== value.currentUser._id && "elements__delete-button_disable"}`}
                     onClick={handleDeleteClick}></button>
             </div>
         </li>

@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
 function EditProfilePopup(props) {
 
-    const currentUser = useContext(CurrentUserContext);
+    const value = useContext(CurrentUserContext);
     const [name, setName] = useState('');
     const [validName, setValidName] = useState(false);
     const [nameValidationMessage, setNameValidationMessage] = useState('');
@@ -14,11 +14,11 @@ function EditProfilePopup(props) {
 
 
     useEffect(() => {
-        setName(currentUser.name);
-        setDescription(currentUser.about);
+        setName(value.currentUser.name);
+        setDescription(value.currentUser.about);
         setValidName(true);
         setValidDescription(true);
-    }, [currentUser, props.isOpen])
+    }, [value.currentUser, props.isOpen])
 
     function handleChangeName(e) {
         setName(e.target.value);

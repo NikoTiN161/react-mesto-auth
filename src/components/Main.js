@@ -4,15 +4,15 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
 function Main(props) {
 
-    const currentUser = React.useContext(CurrentUserContext);
+    const value = React.useContext(CurrentUserContext);
 
     return (
         <main className="content page__content">
             <section className="profile">
-                <button type="button" style={{ backgroundImage: `url(${currentUser.avatar})` }} className="profile__avatar" onClick={props.onEditAvatar}></button>
+                <button type="button" style={{ backgroundImage: `url(${value.currentUser.avatar})` }} className="profile__avatar" onClick={props.onEditAvatar}></button>
                 <div className="profile__info">
-                    <h1 className="profile__username">{currentUser.name}</h1>
-                    <p className="profile__description">{currentUser.about}</p>
+                    <h1 className="profile__username">{value.currentUser.name}</h1>
+                    <p className="profile__description">{value.currentUser.about}</p>
                 </div>
                 <button type="button" className="profile__edit-button" onClick={props.onEditProfile}></button>
                 <button type="button" className="profile__add-button" onClick={props.onAddPlace}></button>
