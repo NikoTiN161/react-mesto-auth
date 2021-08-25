@@ -7,7 +7,7 @@ function PopupWithForm(props) {
                 <form onSubmit={props.onSubmit} action="/" noValidate name={`form_type_${props.name}`} className={`form form_type_${props.name}`}>
                     <h2 className="form__header">{props.title}</h2>
                     {props.children}
-                    <button type="submit" className={`form__save-button ${!props.valid && 'form__save-button_disabled'}`}>{props.buttonText}</button>
+                    <button type="submit" className={`form__save-button ${!props.isValid && 'form__save-button_disabled'}`}>{props.buttonText}</button>
                 </form>
             </div>
         </div>

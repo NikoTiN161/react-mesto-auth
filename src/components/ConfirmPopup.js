@@ -15,7 +15,7 @@ function ConfirmPopup(props) {
             isOpen={props.isOpen}
             onClose={props.onClose}
             onClickOverlay={props.onClickOverlay}
-            valid
+            isValid
             buttonText={props.isSubmitting ? "Удаление..." : "Да"}
             onSubmit={handleDeleteCardSubmit}
         />
