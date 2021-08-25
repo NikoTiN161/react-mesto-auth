@@ -1,6 +1,4 @@
 import useFormAndValidation from '../hooks/useFormAndValidation';
-import InfoTooltip from './InfoTooltip';
-
 
 function Login(props) {
 
@@ -12,7 +10,6 @@ function Login(props) {
     }
 
     return (
-        <>
             <form onSubmit={handleSubmit} action="/signin" noValidate name="form-auth" className="form">
                 <h2 className="form__header form__header_theme_white">{props.title}</h2>
 
@@ -28,15 +25,6 @@ function Login(props) {
 
                 <button type="submit" className={`form__save-button form__save-button_theme_white ${!isValid && 'form__button_disabled'}`} disabled={!isValid}>{props.buttonText}</button>
             </form>
-
-            <InfoTooltip
-            registerSuccess={props.registerSuccess}
-            isOpen={props.isOpen}
-            onClose={props.onClose}
-            onClickOverlay={props.onClickOverlay}
-            title={props.registerSuccess ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.'}
-            />
-        </>
     )
 }
 

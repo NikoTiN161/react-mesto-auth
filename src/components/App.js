@@ -15,9 +15,10 @@ import auth from '../utils/auth';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Login from './Login';
 import Register from './Register';
+import InfoTooltip from './InfoTooltip';
 
 function App() {
-    const token = localStorage.getItem('token');
+    let token = localStorage.getItem('token');
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -29,7 +30,7 @@ function App() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState(false);
-    const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
+    const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
     const [emailUser, setEmailUser] = useState('');
     const history = useHistory();
     const location = useLocation();
@@ -133,7 +134,7 @@ function App() {
         setIsCardPopupOpen(false);
         setIsConfirmPopupOpen(false);
         setIsSubmitting(false);
-        setIsRegisterPopupOpen(false);
+        setIsInfoTooltipOpen(false);
     }
 
     function handleClickOverlay(e) {
@@ -165,6 +166,7 @@ function App() {
         auth.login(email, password)
             .then((data) => {
                 if (data.token) {
+                    token = data.token;
                     setLoggedIn(true);
                     history.push('/');
                 }
@@ -186,7 +188,7 @@ function App() {
                     history.push('/sing-in');
                     setRegisterSuccess(true);
                 }
-                setIsRegisterPopupOpen(true);
+                setIsInfoTooltipOpen(true);
             })
             .catch(err => console.log(err));
     }
@@ -201,10 +203,6 @@ function App() {
                         onLogin={onLogin}
                         title="Вход"
                         buttonText="Войти"
-                        registerSuccess={registerSuccess}
-                        isOpen={isRegisterPopupOpen}
-                        onClose={closeAllPopups}
-                        onClickOverlay={handleClickOverlay}
                     />
                 </Route>
                 <Route path="/sing-up">
@@ -213,10 +211,6 @@ function App() {
                         onRegister={onRegister}
                         title="Регистрация"
                         buttonText="Зарегистрироваться"
-                        registerSuccess={registerSuccess}
-                        isOpen={isRegisterPopupOpen}
-                        onClose={closeAllPopups}
-                        onClickOverlay={handleClickOverlay}
                     />
                 </Route>
                 <ProtectedRoute
@@ -233,6 +227,13 @@ function App() {
             </Switch>
             <Footer />
 
+            <InfoTooltip
+            registerSuccess={registerSuccess}
+            isOpen={isInfoTooltipOpen}
+            onClose={closeAllPopups}
+            onClickOverlay={handleClickOverlay}
+            title={registerSuccess ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.'}
+            />
 
             <EditAvatarPopup
                 isOpen={isEditAvatarPopupOpen}
