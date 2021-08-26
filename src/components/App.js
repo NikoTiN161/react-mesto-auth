@@ -18,7 +18,6 @@ import Register from './Register';
 import InfoTooltip from './InfoTooltip';
 
 function App() {
-    let token = localStorage.getItem('token');
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -50,14 +49,16 @@ function App() {
         }, []);
 
     useEffect(() => {
-        auth.tokenCheck(token)
+        auth.tokenCheck(localStorage.getItem('token'))
             .then(data => {
-                setLoggedIn(true);
-                setEmailUser(data.data.email);
-                history.push('/');
+                if (data.data.email) {
+                    setLoggedIn(true);
+                    setEmailUser(data.data.email);
+                    history.push('/');
+                }
             })
             .catch(err => console.error(err));
-    }, [history, location.pathname, token]);
+    }, [history, location.pathname]);
 
     function handleCardLike(card) {
         const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -166,7 +167,7 @@ function App() {
         auth.login(email, password)
             .then((data) => {
                 if (data.token) {
-                    token = data.token;
+                    localStorage.setItem('token', data.token);
                     setLoggedIn(true);
                     history.push('/');
                 }
@@ -176,7 +177,7 @@ function App() {
 
     function onSignOut() {
         setLoggedIn(false);
-        localStorage.removeItem('token');
+        localStorage.removeItem('token')
         history.push('/sing-in');
     }
 

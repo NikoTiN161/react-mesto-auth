@@ -8,6 +8,7 @@ function Register(props) {
         e.preventDefault();
         props.onRegister(values.email, values.password);
     }
+    console.log(isValid);
 
     return (
             <form onSubmit={handleSubmit} action="/signup" noValidate name="form-auth" className="form">

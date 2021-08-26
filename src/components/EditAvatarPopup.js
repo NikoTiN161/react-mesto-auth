@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useFormAndValidation from "../hooks/useFormAndValidation";
 import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup(props) {
 
-    const { values, handleChange, errors, isValid } = useFormAndValidation();
+    const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -13,6 +13,10 @@ function EditAvatarPopup(props) {
             link: values.link,
         });
     }
+
+    useEffect(() => {
+        resetForm({ link: '' });
+    }, [props.isOpen]);
 
     return (
         <PopupWithForm

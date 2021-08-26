@@ -13,15 +13,12 @@ function AddPlacePopup(props) {
             name: values.name,
             link: values.link,
         });
+        
     }
-
-    // useEffect(() => {
-    //     // resetForm((values) => {
-    //     //     values.name = '';
-    //     //     values.link = '';
-
-    //     // });
-    // }, [props.isOpen]);
+    
+    useEffect(() => {
+        resetForm({ name: '', link: '' });
+    }, [props.isOpen]);
     
 
     return (
