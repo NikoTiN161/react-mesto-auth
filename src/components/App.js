@@ -184,7 +184,6 @@ function App() {
     function onRegister(email, password) {
         auth.register(email, password)
             .then(res => {
-                console.log(res);
                 if (!!res.data) {
                     history.push('/sing-in');
                     setRegisterSuccess(true);
