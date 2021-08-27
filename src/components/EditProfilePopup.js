@@ -38,11 +38,11 @@ function EditProfilePopup(props) {
         >
             <input type="text" id="input-name" required minLength="2" maxLength="40" name="name"
                 placeholder="Имя профиля" className="form__input form__input_type_name"
-                value={values.name} onChange={handleChange} />
+                value={values.name || ''} onChange={handleChange} />
             <span className={`input-name-error form__input-error ${!isValid && 'form__input-error_active'}`}>{errors.name}</span>
             <input type="text" id="input-description" required minLength="2" maxLength="200" name="about"
                 placeholder="Описание профиля" className="form__input form__input_type_description"
-                value={values.about} onChange={handleChange} />
+                value={values.about || ''} onChange={handleChange} />
             <span className={`input-description-error form__input-error ${!isValid && 'form__input-error_active'}`}>{errors.about}</span>
         </PopupWithForm>
     )

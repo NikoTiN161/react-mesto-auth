@@ -32,10 +32,10 @@ function AddPlacePopup(props) {
             buttonText={props.isSubmitting ? "Сохранение..." : "Сохранить"}
             onSubmit={handleAddPlaceSubmit}
         >
-            <input value={values.name} onChange={handleChange} type="text" id="input-title" required minLength="2" maxLength="30" name="name"
+            <input value={values.name || ''} onChange={handleChange} type="text" id="input-title" required minLength="2" maxLength="30" name="name"
                 placeholder="Название" className="form__input form__input_type_title" />
             <span className={`input-name-error form__input-error ${!isValid && 'form__input-error_active'}`}>{errors.name}</span>
-            <input value={values.link} onChange={handleChange} type="url" id="input-link" required name="link" placeholder="Ссылка на картинку"
+            <input value={values.link || ''} onChange={handleChange} type="url" id="input-link" required name="link" placeholder="Ссылка на картинку"
                 className="form__input form__input_type_link" />
             <span className={`input-name-error form__input-error ${!isValid && 'form__input-error_active'}`}>{errors.link}</span>
         </PopupWithForm>

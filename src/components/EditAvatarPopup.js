@@ -29,7 +29,7 @@ function EditAvatarPopup(props) {
             buttonText={props.isSubmitting ? "Сохранение..." : "Сохранить"}
             onSubmit={handleSubmit}
         >
-            <input value={values.link} onChange={handleChange} type="url" id="input-url" required name="link" placeholder="Ссылка на картинку"
+            <input value={values.link || ''} onChange={handleChange} type="url" id="input-url" required name="link" placeholder="Ссылка на картинку"
                 className="form__input form__input_type_link" />
             <span className={`input-url-error form__input-error ${!isValid && 'form__input-error_active'}`}>{errors.link}</span>
         </PopupWithForm>
